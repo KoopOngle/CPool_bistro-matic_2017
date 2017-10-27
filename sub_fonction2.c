@@ -54,12 +54,12 @@ void my_concat_str(char *src, char *str)
 	src[i] = '\0';
 }
 
-char *chooseGoodOp(char sign1, char sign2, char *str1dup, char *str2dup)
+char *chooseGoodOp(char sign1, char sign2, char *str1dup, char *str2dup, char* base)
 {
 	char *result;
 
 	if (sign1 == '-' && sign2 == '-') {
-		result = my_add_inf(str1dup, str2dup);
+		result = my_add_inf(str1dup, str2dup, base);
 		if (result[0] != '0')
 			add_minus(result);
 	} else if (sign1 == '-' || sign2 == '-') {
@@ -71,7 +71,7 @@ char *chooseGoodOp(char sign1, char sign2, char *str1dup, char *str2dup)
 			(my_new_strcmp(str2dup, str1dup) > 0 && sign2 == '-'))
 			add_minus(result);
 	} else
-		result = my_add_inf(str1dup, str2dup);
+		result = my_add_inf(str1dup, str2dup, base);
 	return (result);
 }
 
