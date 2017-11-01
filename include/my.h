@@ -7,10 +7,6 @@
 
 #ifndef MY_H_
 #define MY_H_
-int my_ischaralpha(char c);
-int check_sign(char const *str, int i);
-int get_int_size(char const *str, int i);
-int change_str_int(char const *str, int size, int i);
 int mynew_compute_square_root(int nb);
 int check_nbr(int nb);
 int get_tot_len_two(char **tab);
@@ -27,6 +23,7 @@ void my_swap(int *a, int *b);
 int my_putstr(char const *str);
 int my_strlen(char const *str);
 int my_getnbr(char const *str);
+int my_getnbrstr(char **str);
 void my_sort_int_array(int *a, int n);
 int my_compute_power_rec(int n, int p);
 int my_compute_square_root(int n);

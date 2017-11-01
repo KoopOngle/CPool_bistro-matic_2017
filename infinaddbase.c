@@ -79,7 +79,8 @@ char *my_add_inf(char *str1, char *str2, char* base)
 		else if (i >= str2len)
 			res += get_pos_in_base(str1dup[i], base);
 		else
-			res += get_pos_in_base(str1dup[i],base) + get_pos_in_base(str2dup[i], base);
+			res += get_pos_in_base(str1dup[i],base)
+				+ get_pos_in_base(str2dup[i], base);
 		if (res >= baselen)
 			result[i] = base[res % baselen];
 	        else

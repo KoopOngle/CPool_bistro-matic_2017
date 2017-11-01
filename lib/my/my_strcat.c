@@ -20,3 +20,14 @@ char	*my_strcat(char *dest, char const *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
+char my_str_charcat(char *dest, char c);
+{
+	int     i = 0;
+
+        while (dest[i] != '\0')
+		i++;
+	dest[i] = c;
+        dest[i + 1] = '\0';
+	return (dest);
+}
