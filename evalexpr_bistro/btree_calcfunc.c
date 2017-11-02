@@ -9,27 +9,27 @@
 #include "btree.h"
 #include <stdlib.h>
 
-int btree_t_val(btree_t *self)
+int btree_t_val(btree_t *self, char *base, char *opbase)
 {
-	if (self->op == ' ')
+	if (self->op == '\0')
 		return (self->value);
 	else {
 		switch ((char)self->op) {
 		case '+':
-			return (self->left->val(self->left)
-				+ self->right->val(self->right));
+			return (btree_t_val(self->left, base, opbase)
+				+ btree_t_val(self->right, base, opbase));
 		case '-':
-			return (self->left->val(self->left)
-				- self->right->val(self->right));
+			return (btree_t_val(self->left, base, opbase)
+				- btree_t_val(self->right, base, opbase));
 		case '/':
-			return (self->left->val(self->left)
-				/ self->right->val(self->right));
+			return (btree_t_val(self->left, base, opbase)
+				/ btree_t_val(self->right, base, opbase));
 		case '*':
-			return (self->left->val(self->left)
-				* self->right->val(self->right));
+			return (btree_t_val(self->left, base, opbase)
+				* btree_t_val(self->right, base, opbase));
 		case '%':
-			return (self->left->val(self->left)
-				% self->right->val(self->right));
+			return (btree_t_val(self->left, base, opbase)
+				% btree_t_val(self->right, base, opbase));
 		default :
 			return (-84);
 		}

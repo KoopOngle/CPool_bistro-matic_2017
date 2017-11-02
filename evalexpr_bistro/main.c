@@ -9,26 +9,26 @@
 #include "btree.h"
 #include <stdlib.h>
 
-void btree_insert_data(btree_t **root, char op, int value, int last_was_par);
-int btree_cmp_prio(char op1, char op2);
-int cmp_prio(char op1, char op2);
-btree_t *btree_create_node(int value, char op, int (*valfunc)(btree_t *));
-int btree_t_val(btree_t *self);
-btree_t *eval_expr(btree_t *node, char *str, int sign);
-btree_t *parser(char const *str);
+void btree_insert_data(btree_t **root, char op, int value, int last_was_par, char **bases);
+btree_t *btree_create_node(int value, char op);
+int btree_t_val(btree_t *self, char **bases);
+btree_t *eval_expr(btree_t *node, char *str, int sign, char **bases);
+void btree_apply_prefix(btree_t *root, int (*applyf)(char *, char));
 
-int applyf(int value)
+int applyf(char *value, char op)
 {
-	printf("1 :%c\n", value);
-	printf("2 :%d\n", value);
+	printf("1 :%c\n", op);
+	printf("2 :%s\n", value);
 	return 0;
 }
-void btree_apply_prefix(btree_t *root, int (*applyf)(int));
 int	main(int argc, char **argv)
 {
 	btree_t *node;
 	char *str = my_strdup(argv[1]);
-	node = eval_expr(NULL, str, 0);
+        char **bases = malloc(sizeof(char *) * 2);
+        bases[0] = my_strdup(argv[2]);
+        bases[1] = my_strdup(argv[3]);
+	node = eval_expr(NULL, str, 0, bases);
 	btree_apply_prefix(node, &applyf);
 	/*btree_insert_data(&node, ' ', 2, btree_cmp_prio);
 	btree_insert_data(&node, '*', 0, btree_cmp_prio);
@@ -57,6 +57,6 @@ int	main(int argc, char **argv)
 	btree_t *node8 = btree_create_node(3, ' ', &btree_t_val);
 	node6->left = node7;
 	node6->right = node8;*/
-	my_put_nbr(node->val(node));
+	//my_put_nbr(node->val(node));
 	return (0);
 }

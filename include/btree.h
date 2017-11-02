@@ -13,7 +13,5 @@ typedef struct btree
 	struct btree *right;
 	char *value;
 	char op;
-
-	int (*val)(struct btree *);
 } btree_t;
 #endif

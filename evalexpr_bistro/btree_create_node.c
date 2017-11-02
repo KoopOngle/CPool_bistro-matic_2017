@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "btree.h"
 
-btree_t *btree_create_node(char *value, char op, int (*valfunc)(btree_t *))
+btree_t *btree_create_node(char *value, char op)
 {
 	btree_t *node;
 
@@ -17,6 +17,5 @@ btree_t *btree_create_node(char *value, char op, int (*valfunc)(btree_t *))
 	node->op = op;
 	node->left = NULL;
 	node->right = NULL;
-	node->val = valfunc;
 	return (node);
 }

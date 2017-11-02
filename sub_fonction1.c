@@ -10,14 +10,14 @@
 #include <unistd.h>
 #include "mysub.h"
 
-void add_minus(char *str)
+void add_minus(char *str, char *opbase)
 {
 	int i = 0;
 
 	my_revstr(str);
 	while (str[i] != '\0')
 		i++;
-	str[i] = '-';
+	str[i] = opbase[3];
 	str[i + 1] = '\0';
 	my_revstr(str);
 }
