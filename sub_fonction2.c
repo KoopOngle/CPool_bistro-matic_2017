@@ -61,7 +61,7 @@ char *chooseGoodOp(char sign1, char sign2, char *str1dup, char *str2dup, char* b
 	if (sign1 == '-' && sign2 == '-') {
 		result = my_add_inf(str1dup, str2dup, base);
 		if (result[0] != '0')
-			add_minus(result);
+			add_minus(result, "()+-/*%");// A CHANGER
 	} else if (sign1 == '-' || sign2 == '-') {
 		if (my_new_strcmp(str1dup, str2dup) > 0)
 			result = my_sub_inf(str1dup, str2dup);
@@ -69,7 +69,7 @@ char *chooseGoodOp(char sign1, char sign2, char *str1dup, char *str2dup, char* b
 			result = my_sub_inf(str2dup, str1dup);
 		if ((my_new_strcmp(str1dup, str2dup) > 0 && sign1 == '-') ||
 			(my_new_strcmp(str2dup, str1dup) > 0 && sign2 == '-'))
-			add_minus(result);
+			add_minus(result, "()+-/*%");// A CHANGER
 	} else
 		result = my_add_inf(str1dup, str2dup, base);
 	return (result);

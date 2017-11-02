@@ -104,4 +104,3 @@ btree_t *eval_expr(btree_t *node, char const *str, int sign, char **bases)
 	btree_concat_tree(&sign_node, node);
 	return (sign_node);
 }
-

@@ -118,7 +118,7 @@ char *infinadd(char *str1, char *str2, char *base)
 }
 
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	//if (my_hundle_error(argc, argv) == 0)
 	//	return (84);
@@ -126,3 +126,4 @@ int	main(int argc, char **argv)
 	my_putstr("\n");
 	return (0);
 }
+*/

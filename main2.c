@@ -125,7 +125,7 @@ void bail_sombre(char **a1, char **a2)
 	int i = 0;
 	int j = 0;
 	char *str1 = malloc(sizeof(char) * j_strlen(*a1) + 1);
-        char *str2 = malloc(sizeof(char) * j_strlen(*a2) + 1);
+	char *str2 = malloc(sizeof(char) * j_strlen(*a2) + 1);
 
 
 	while (a1[0][i] != '\0') {
@@ -171,7 +171,7 @@ void ges_neg(char **a1, char **a2)
 		}
 		if (a2[0][j] == '-')
 			count++;
-		printf("%d\n", count);
+		//printf("%d\n", count);
 		i = i + 1;
 		j = j + 1;
 	}
@@ -220,7 +220,7 @@ char *multinf(char *a1, char *a2, char *base)
 	}
 	return(res[0]);
 }
-/*
+
 int main(int ac, char **av)
 {
 	char base[] = "0123456789";
@@ -234,5 +234,6 @@ int main(int ac, char **av)
 	//printf("%s\n", str);
 	//printf("%s\n", str1);
 	multinf(str,str1,base);
+	my_putchar('\n');
 	return 0;
-	}*/
+}

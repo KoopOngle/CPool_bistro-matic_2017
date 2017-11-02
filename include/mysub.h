@@ -10,7 +10,7 @@
 int my_new_strcmp(char *str, char *str2);
 void my_concat_str(char *src, char *str);
 char *chooseGoodOp(char sign1, char sign2, char *str1dup, char *str2dup, char *base);
-void add_minus(char *str);
+void add_minus(char *str, char *opbase);
 void to_zero(char *str);
 char *getResultMalloc(int size);
 char *getResultWithoutZero(char *str);
