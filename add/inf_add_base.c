@@ -48,7 +48,7 @@ char *addinfcalc(char *a1, char *a2, char *base)
 {
 	int a1s = my_strlen(a1);
 	int a2s = my_strlen(a2);
-	int tmp;
+	int tmp = 0;
 	int i;
 	int basel = my_strlen(base);
 	char *res = malloc(sizeof(char) * (a1s + a2s) + 1);
