@@ -1,9 +1,0 @@
-/*
-** EPITECH PROJECT, 2017
-** preparser_evalexpr.c
-** File description:
-** preparser evalexpr
-*/
-
-#include "my.h"
-

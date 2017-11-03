@@ -16,20 +16,20 @@ int btree_t_val(btree_t *self, char *base, char *opbase)
 	else {
 		switch ((char)self->op) {
 		case '+':
-			return (btree_t_val(self->left, base, opbase)
-				+ btree_t_val(self->right, base, opbase));
+			return (inf_add(btree_t_val(self->left, base, opbase)
+					,btree_t_val(self->right, base, opbase), base, opbase));
 		case '-':
-			return (btree_t_val(self->left, base, opbase)
-				- btree_t_val(self->right, base, opbase));
+			return (inf_sub(btree_t_val(self->left, base, opbase)
+                                        ,btree_t_val(self->right, base, opbase), base, opbase));
 		case '/':
-			return (btree_t_val(self->left, base, opbase)
-				/ btree_t_val(self->right, base, opbase));
+			return (inf_div(btree_t_val(self->left, base, opbase)
+                                        ,btree_t_val(self->right, base, opbase), base, opbase));
 		case '*':
-			return (btree_t_val(self->left, base, opbase)
-				* btree_t_val(self->right, base, opbase));
+			return (inf_mult(btree_t_val(self->left, base, opbase)
+                                        ,btree_t_val(self->right, base, opbase), base, opbase));
 		case '%':
-			return (btree_t_val(self->left, base, opbase)
-				% btree_t_val(self->right, base, opbase));
+			return (inf_add(btree_t_val(self->left, base, opbase)
+                                        ,btree_t_val(self->right, base, opbase), base, opbase));
 		default :
 			return (-84);
 		}
