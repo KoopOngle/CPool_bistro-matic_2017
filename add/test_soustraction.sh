@@ -14,8 +14,8 @@ for i in `seq 1 500`; do
     then
 	echo -e "\e[32mOK\e[0m: GOT: $nbr4"
     else
-	echo -e "\e[31mFailed\e[0m: GOT: $nbr4, but exepted: $nbr3 for $nbr1 - $nbr2"
-	echo -e "\e[31mFailed\e[0m: GOT: $nbr4, but exepted: $nbr3 for $nbr1 - $nbr2" >> fail_soustraction
+	echo -e "\e[31mFailed\e[0m: GOT: $nbr4, but exepted: $nbr3 for $nbr1 -$nbr2"
+	echo -e "\e[31mFailed\e[0m: GOT: $nbr4, but exepted: $nbr3 for $nbr1 -$nbr2" >> fail_soustraction
     fi
 done
 for z in `seq 1 500`; do
