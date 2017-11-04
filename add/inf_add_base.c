@@ -112,27 +112,16 @@ char *subinfcalc(char *a1, char *a2, char *base)
 }
 
 // A REMPLACER POUR PLUS DE PROPRETER ! // RAPPEL TOI 3 LIGNE ET C'EST BON OUBLI PAS
-char *miniclear(char *str)
-{
-	int k = 0;
-	char *tmp = malloc(sizeof(char) * (my_strlen(str)) + 1);
 
-	for (int i = 0; str[i] != '\0'; i++) {
-		if (i > 0) {
-			tmp[k] = str[i];
-			k++;
-		}
-	}
-	tmp[k] = '\0';
-	return (tmp);
-}
 
-char *a_sign(char *a1, char *a2, char *base, char *opbase)
+char *inf_add(char *a1, char *a2, char *base, char *opbase)
 {
-	char *tmp;
+	char *stra;
+	char *strb;
 	char *res;
-
+	
 	if (a1[0] == opbase[3] && a2[0] == opbase[3]) {
+<<<<<<< HEAD
 		a1 = clear_z(a1, base);
 		a2 = clear_z(a2, base);
 		//printf("DEBUG 1 : %s %s\n", a1, a2);
@@ -172,6 +161,33 @@ char *inf_add(char *a1, char *a2, char *base, char *opbase)
 		return(a_sign(a1,a2,base,opbase));
 	}else	
 		return (addinfcalc(a1,a2,base));
+=======
+		stra = clear_z(a1,base);
+		strb = clear_z(a2,base);
+		return (add_minus(addinfcalc(stra,strb,base),opbase));
+        } else if (a1[0] == opbase[3]) {
+		stra = clear_z(a1,base);
+		strb = clear_z(a2,base);
+		printf("DUBUG 1 : %s - %s\n", stra, strb);
+		if ((my_strlen(stra) > my_strlen(strb)) || (my_strlen(stra) == my_strlen(strb) && in_to_base(base,a1[0]) > in_to_base(base,a2[0]))) {
+			printf("DUBUG 2 : %s - %s\n", stra, strb);
+			res = subinfcalc(strb,stra,base);
+			return (add_minus(res,opbase));
+		}
+		else
+			return(subinfcalc(strb,stra,base));
+        } else if (a2[0] == opbase[3]) {
+		stra = clear_z(a1,base);
+		strb = clear_z(a2,base);
+		if (my_strlen(stra) < my_strlen(strb) || (my_strlen(stra) == my_strlen(strb) && in_to_base(base,a1[0]) < in_to_base(base,a2[0])))
+			return(add_minus(subinfcalc(strb,stra,base),opbase));
+		else
+			return(subinfcalc(stra,strb,base));
+	} else if (a1[0] != opbase[3] && a2[0] != opbase[3]) {
+		return(addinfcalc(a1,a2,base));
+        } else                                                                  
+                return("0");
+>>>>>>> 20a71cc7da583415e5411e53a8e971042154ad3c
 }
 
 int main(int ac, char **av)
