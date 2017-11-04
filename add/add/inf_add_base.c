@@ -12,10 +12,15 @@ int in_to_base(char *base, char c)
 
 char *add_minus(char *str, char *opbase)
 {
-	char *res = malloc(sizeof(char) * (my_strlen(str)) + 2);
-	res = my_revstr(str);
-	res[my_strlen(str)] = opbase[3];
-	res[my_strlen(str) + 1] = '\0';
+	int i = 0;
+	char *strdup = my_strdup(str);
+	char *res = malloc(sizeof(char) * (my_strlen(str)) + 4);
+	
+	res = my_revstr(strdup);
+	while (res[i] != '\0')
+		i++;
+	res[i] = opbase[3];
+	res[i + 1] = '\0';
 	return (my_revstr(res));
 }
 
@@ -269,7 +274,7 @@ char *chooseGoodOp(char sign1, char sign2, char **strs, char **bases)
         if (sign1 == bases[1][3] && sign2 == bases[1][3]) {
                 result = addinfcalc(strs[0], strs[1], bases[0]);
                 if (result[0] != bases[0][0])
-                        add_minus(result, bases[1]);
+                        result = add_minus(result, bases[1]);
 	} else if (sign1 == bases[1][3] || sign2 == bases[1][3]) {
                 if (my_new_strcmp(strs[0], strs[1], bases) > 0)
                         result = subinfcalc(strs[0], strs[1], bases[0]);
@@ -277,12 +282,11 @@ char *chooseGoodOp(char sign1, char sign2, char **strs, char **bases)
                         result = subinfcalc(strs[1], strs[0], bases[0]);
                 if ((my_new_strcmp(strs[0], strs[1], bases) > 0 && sign1 == bases[1][3]) ||
 		    (my_new_strcmp(strs[1], strs[0], bases) > 0 && sign2 == bases[1][3]))
-                        add_minus(result, bases[1]);
+                        result = add_minus(result, bases[1]);
         } else
                 result = addinfcalc(strs[0], strs[1], bases[0]);
         return (result);
 }
-
 
 char *inf_add(char *str1, char *str2, char **bases)
 {
@@ -306,6 +310,19 @@ char *inf_add(char *str1, char *str2, char **bases)
         return (result);
 }
 
+char *inf_sub(char *str1, char *str2, char **bases)
+{
+	char *str1dup = my_strdup(str1);
+	char *str2dup = my_strdup(str2);
+	if (str2dup[0] == bases[1][3]) {
+		str2dup++;
+	}
+	else {
+		str2dup = add_minus(str2dup, bases[1]);
+	}
+	return (inf_add(str1dup, str2dup, bases));
+}
+
 
 
 int main(int ac, char **av)
@@ -315,6 +332,6 @@ int main(int ac, char **av)
 	char *opbase = "012-";
 	bases[0] = base;
 	bases[1] = opbase;
-	printf("%s\n",inf_add(av[1],av[2],bases));
+	printf("%s\n",inf_sub(av[1],av[2],bases));
 	return (0);
 }
