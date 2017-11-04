@@ -10,11 +10,6 @@
 #include "stack.h"
 #include <stdlib.h>
 
-int stack(stack_t **list, btree_t *node);
-btree_t *get_without_unstack(stack_t *list);
-btree_t *unstack(stack_t **list);
-int getsize(stack_t *stk);
-int is_empty(stack_t *stk);
 void btree_insert_data(btree_t **root, char op, char *value, int last_was_par, char *opbase);
 btree_t *btree_create_node(int value, char op);
 int btree_t_val(btree_t *self);

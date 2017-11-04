@@ -6,9 +6,9 @@
 */
 
 #include "my.h"
+#include "inf_add.h"
 
-
-void add_minus(char *str, char *opbase)
+void add_minusgetnbr(char *str, char *opbase)
 {
         int i = 0;
 
@@ -18,7 +18,7 @@ void add_minus(char *str, char *opbase)
         str[i] = opbase[3];
         str[i + 1] = '\0';
         my_revstr(str);
-}
+	}
 
 
 int	is_in_base(char c, char *base)
@@ -75,7 +75,7 @@ char	*my_getnbrstrbase(char **str, char **bases)
 		result[intSize] = '\0';
 		*str = &str[0][i + intSize];
 		if (sign == -1)
-			add_minus(result, bases[1]);
+			add_minusgetnbr(result, bases[1]);
 		return (result);
 	}
 }
@@ -92,5 +92,5 @@ char	*my_getnbrstrbase(char **str, char **bases)
 		my_putstr("\n");
 	}
 	return (0);
-}
-*/
+	}*/
+

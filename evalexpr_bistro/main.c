@@ -11,7 +11,7 @@
 
 void btree_insert_data(btree_t **root, char op, int value, int last_was_par, char **bases);
 btree_t *btree_create_node(int value, char op);
-int btree_t_val(btree_t *self, char **bases);
+char *btree_t_val(btree_t *self, char **bases);
 btree_t *eval_expr(btree_t *node, char *str, int sign, char **bases);
 void btree_apply_prefix(btree_t *root, int (*applyf)(char *, char));
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
         bases[0] = my_strdup(argv[2]);
         bases[1] = my_strdup(argv[3]);
 	node = eval_expr(NULL, str, 0, bases);
-	btree_apply_prefix(node, &applyf);
+	//btree_apply_prefix(node, &applyf);
 	/*btree_insert_data(&node, ' ', 2, btree_cmp_prio);
 	btree_insert_data(&node, '*', 0, btree_cmp_prio);
 	btree_insert_data(&node, ' ', 2, btree_cmp_prio);
@@ -57,6 +57,6 @@ int	main(int argc, char **argv)
 	btree_t *node8 = btree_create_node(3, ' ', &btree_t_val);
 	node6->left = node7;
 	node6->right = node8;*/
-	//my_put_nbr(node->val(node));
+	my_putstr(btree_t_val(node, bases));
 	return (0);
 }
