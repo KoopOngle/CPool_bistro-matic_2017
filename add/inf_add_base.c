@@ -112,92 +112,40 @@ char *subinfcalc(char *a1, char *a2, char *base)
 }
 
 // A REMPLACER POUR PLUS DE PROPRETER ! // RAPPEL TOI 3 LIGNE ET C'EST BON OUBLI PAS
-char *miniclear(char *str)
-{
-	int k = 0;
-	char *tmp = malloc(sizeof(char) * (my_strlen(str)) + 1);
 
-	for (int i = 0; str[i] != '\0'; i++) {
-		if (i > 0) {
-			tmp[k] = str[i];
-			k++;
-		}
-	}
-	tmp[k] = '\0';
-	return (tmp);
-}
-
-char *a_sign(char *a1, char *a2, char *base, char *opbase)
-{
-	char *tmp;
-	char *res;
-
-	if (a1[0] == opbase[3] && a2[0] == opbase[3]) {
-		a1 = clear_z(a1, base);
-		a2 = clear_z(a2, base);
-		//printf("DEBUG 1 : %s %s\n", a1, a2);
-		res = addinfcalc(a1, a2, base);
-		res = add_minus(res,opbase);
-	} else if (a1[0] == opbase[3]) {
-		//printf("DEBUG 2 : %s %s\n", a1, a2);
-		a1 = clear_z(a1, base);
-		a2 = clear_z(a2, base);
-		//printf("DEBUG 2 : %s %s\n", a1, a2);
-		res = clear_z(subinfcalc(a1, a2, base), base);
-		if (res[0] != '\0')
-			res = add_minus(res,opbase);
-		else
-			*res = base[0];
-	}else if (a2[0] == opbase[3]) {
-		a1 = clear_z(a1, base);
-		a2 = clear_z(a2, base);
-		//printf("DEBUG 3 : %s %s\n", a1, a2);
-		res = clear_z(subinfcalc(a1, a2, base), base);
-	}
-	if (res[0] == base[1] && res[1] == opbase[3]) {
-		res = miniclear(res);
-	}
-	return (res);
-}
-
-char *b_sign(char *a1, char *a2, char *base, char *opbase)
-{
-	int bool = 0;
-	char *tmp;
-	char *res;
-
-	if (a2[0] == opbase[3]) {
-		a1 = clear_z(a1, base);
-		a2 = clear_z(a2, base);
-		if (my_strlen(a1) < my_strlen(a2)) {
-			tmp = a1;
-			a1 = a2;
-			a2 = tmp;
-			bool = 1;
-		}
-		res = clear_z(subinfcalc(a1, a2, base), base);
-	}
-	
-	if (bool == 1)
-		res = add_minus(res, opbase);
-	return (res);
-}
 
 char *inf_add(char *a1, char *a2, char *base, char *opbase)
 {
-	char *tmp = (my_strlen(a1) < my_strlen(a2)) ? a1 : a2;
+	char *stra;
+	char *strb;
+	char *res;
 	
-	if (a2[1] < a1[0] && a2[0] == opbase[3] && my_strlen(a2) > my_strlen(a1))
-	if (a1[0] == opbase[3] || a2[0] == opbase[3]) {
-		if (my_strlen(a1) < my_strlen(a2)) {
-			a1 = (my_strlen(a1) < my_strlen(a2)) ?  a2 : tmp;
-			a2 = (my_strlen(a2) > my_strlen(tmp)) ? tmp : a2;
-		}	
-		return(a_sign(a1,a2,base,opbase));
-	}else if (a2[0] == opbase[3] && a2[1] < a1[0]) {
-		return(a_sign(a1,a2,base,opbase));
-	}else	
-		return (addinfcalc(a1,a2,base));
+	if (a1[0] == opbase[3] && a2[0] == opbase[3]) {
+		stra = clear_z(a1,base);
+		strb = clear_z(a2,base);
+		return (add_minus(addinfcalc(stra,strb,base),opbase));
+        } else if (a1[0] == opbase[3]) {
+		stra = clear_z(a1,base);
+		strb = clear_z(a2,base);
+		printf("DUBUG 1 : %s - %s\n", stra, strb);
+		if ((my_strlen(stra) > my_strlen(strb)) || (my_strlen(stra) == my_strlen(strb) && in_to_base(base,a1[0]) > in_to_base(base,a2[0]))) {
+			printf("DUBUG 2 : %s - %s\n", stra, strb);
+			res = subinfcalc(strb,stra,base);
+			return (add_minus(res,opbase));
+		}
+		else
+			return(subinfcalc(strb,stra,base));
+        } else if (a2[0] == opbase[3]) {
+		stra = clear_z(a1,base);
+		strb = clear_z(a2,base);
+		if (my_strlen(stra) < my_strlen(strb) || (my_strlen(stra) == my_strlen(strb) && in_to_base(base,a1[0]) < in_to_base(base,a2[0])))
+			return(add_minus(subinfcalc(strb,stra,base),opbase));
+		else
+			return(subinfcalc(stra,strb,base));
+	} else if (a1[0] != opbase[3] && a2[0] != opbase[3]) {
+		return(addinfcalc(a1,a2,base));
+        } else                                                                  
+                return("0");
 }
 
 int main(int ac, char **av)

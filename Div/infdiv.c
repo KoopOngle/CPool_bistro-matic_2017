@@ -287,7 +287,7 @@ char *inf_div(char *a1, char *a2, char *base, char *opbase)
 	} else if (a2[0] == opbase[3] && verify(a1,a2,base,opbase) == 1) {
 		a2 = clear_z(a2,base,opbase);
 	} else if ((a1[0] != opbase[3] && a2[0] != opbase[3]) && verify(a1,a2,base,opbase) == 1) {
-		return(div_calc(a1,a2,base,opbase));
+		return(divinfObscur(a1,a2,base));
 	} else
 		return("0");
 }
