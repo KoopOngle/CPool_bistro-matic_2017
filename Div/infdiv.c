@@ -64,6 +64,11 @@ char *clear_z(char *str, char *base, char *opbase)
 	tmp[k] = '\0';
 	return (tmp);
 }
+void k_clear_z(char **str, char *base)
+{
+	while (str[0][0] == base[0])
+		str[0]++;
+}
 
 int verify(char *a1, char *a2, char *base, char *opbase)
 {
@@ -118,24 +123,26 @@ char *addinfcalc(char *a1, char *a2, char *base)
 	return (my_revstr(res));
 }
 
-char *subinfcalc(char *a1, char *a2, char *base)
+char *subinfcalc(char *a1, char *a2, char *base, char *opbase)
 {
 	int a1s = my_strlen(a1);
 	int a2s = my_strlen(a2);
 	int i;
 	int basel = my_strlen(base);
+	char *a1strdup = my_strdup(a1);
+	char *a2strdup = my_strdup(a2);
 	char *res = malloc(sizeof(char) * (a1s + a2s) + 1);
 
-	a1 = my_revstr(a1);
-	a2 = my_revstr(a2);
+	my_revstr(a1strdup);
+	my_revstr(a2strdup);
 	
 	for(i = 0; i < a1s || i < a2s; i++) {
 		if (i >= a1s) {
-			res[i] += in_to_base(base, a2[i]);
+			res[i] += in_to_base(base, a2strdup[i]);
 		} else if (i >= a2s) {
-			res[i] += in_to_base(base, a1[i]);
+			res[i] += in_to_base(base, a1strdup[i]);
 		} else {
-			res[i] += (in_to_base(base, a1[i]) - in_to_base(base, a2[i]));
+			res[i] += (in_to_base(base, a1strdup[i]) - in_to_base(base, a2strdup[i]));
 		}
 		if (res[i] < 0) {
 			res[i] = base[res[i] + basel];
@@ -151,28 +158,30 @@ char *subinfcalc(char *a1, char *a2, char *base)
 		res[i] = '\0';
 
 	
-	return (my_revstr(res));
+	my_revstr(res);
+	k_clear_z(&res, base);
+	return (res);
 }
 
-char *divinfObscur(char *a1, char *a2, char *base)
+char *divinfObscur(char *a1, char *a2, char *base, char *opbase)
 {
 	int k = 0;
 	int a1s = my_strlen(a1);
 	int a2s = my_strlen(a2);
-	
-	char *sacrefice = subinfcalc(a1,a2,base);
+	char *sacrefice = subinfcalc(a1,a2,base, opbase);
 	char *number = "1";
+	char *a1strdup = my_strdup(a1);
 	char *a3 = malloc(sizeof(char) * (a1s) + 2);
 	char *res = malloc(sizeof(char) * (a1s) + 1);
-
 	if (sacrefice[0] == base[0] - 1) {
 		res[0] = base[1];
 		return (res);
 	}
-	a3 = my_revstr(a1);
+	a3 = my_revstr(a1strdup);
 	res[k] = 0;
 	while (my_strlen(a3) >= a2s) {
-		a3 = subinfcalc(a3,a2,base);
+		printf("%s - %s\n", a3, a2);
+		a3 = subinfcalc(a3, a2, base, opbase);
 		if (my_strlen(a3) < a2s || is_to_base(base,a3[0]) != 1)
 			break;
 		res = addinfcalc(number, res, base);
@@ -226,22 +235,21 @@ char *multcalc(char *a1, char *a2, char *base)
 }
 
 
-char *modulo(char *a1, char *a2, char *base)
+char *modulo(char *a1, char *a2, char *base, char *opbase)
 {
 	int i = 0;
 	int a1s = my_strlen(a1);
 	int a2s = my_strlen(a2);
 
-	a1 = my_revstr(a1);
-	char *res = malloc(sizeof(char) * (a1s) + 1);
+	//a1 = my_revstr(a1);
+       	char *res = malloc(sizeof(char) * (a1s) + 1);
 	char *nb3 = malloc(sizeof(char) * (a1s) + 1);
 	char *tmp = malloc(sizeof(char) * (a1s) + 1);
-
-	tmp = divinfObscur(a1, a2, base);
+	tmp = divinfObscur(a1, a2, base, opbase);
 	printf("%s-%s-%s-%s-%s\n", tmp, nb3, res, a1, a2);
 	nb3 = multcalc(a2, tmp, base);
 	printf("%s-%s-%s-%s-%s\n", tmp, nb3, res, a1, a2);
-	res = subinfcalc(a1,my_revstr(nb3),base);
+	res = subinfcalc(a1,my_revstr(nb3),base, opbase);
 	printf("%s-%s-%s-%s-%s\n", tmp, nb3, res, a1, a2);
 	i = my_strlen(res) - 1;
 	res[i] = '\0';
@@ -264,10 +272,11 @@ char *div_calc(char *a1, char *a2, char *base, char *opbase)
 	while (a1[i] != '\0') {
 		a3[j] = a1[i];
 		if (my_strlen(a3) >= a2s && verify(a3,a2,base,opbase) == 1) {
-			a4 = divinfObscur(a3, a2, base);
+			a4 = divinfObscur(a3, a2, base, opbase);
 			res[k] = a4[0];
 			k++;
-			a3 = modulo(a3,a2,base);
+			printf("%s-%s\n", a4, a3);
+			a3 = modulo(a3,a2,base, opbase);
 			printf("%s-%s\n", a4, a3);
 			j = my_strlen(a3) - 1;
 		}

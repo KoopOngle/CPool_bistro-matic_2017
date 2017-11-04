@@ -21,5 +21,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm *~
 
 re:	fclean all

@@ -160,41 +160,15 @@ char *a_sign(char *a1, char *a2, char *base, char *opbase)
 	return (res);
 }
 
-char *b_sign(char *a1, char *a2, char *base, char *opbase)
-{
-	int bool = 0;
-	char *tmp;
-	char *res;
-
-	if (a2[0] == opbase[3]) {
-		a1 = clear_z(a1, base);
-		a2 = clear_z(a2, base);
-		if (my_strlen(a1) < my_strlen(a2)) {
-			tmp = a1;
-			a1 = a2;
-			a2 = tmp;
-			bool = 1;
-		}
-		res = clear_z(subinfcalc(a1, a2, base), base);
-	}
-	
-	if (bool == 1)
-		res = add_minus(res, opbase);
-	return (res);
-}
-
 char *inf_add(char *a1, char *a2, char *base, char *opbase)
 {
 	char *tmp = (my_strlen(a1) < my_strlen(a2)) ? a1 : a2;
-	
-	if (a2[1] < a1[0] && a2[0] == opbase[3] && my_strlen(a2) > my_strlen(a1))
+
 	if (a1[0] == opbase[3] || a2[0] == opbase[3]) {
 		if (my_strlen(a1) < my_strlen(a2)) {
 			a1 = (my_strlen(a1) < my_strlen(a2)) ?  a2 : tmp;
 			a2 = (my_strlen(a2) > my_strlen(tmp)) ? tmp : a2;
 		}	
-		return(a_sign(a1,a2,base,opbase));
-	}else if (a2[0] == opbase[3] && a2[1] < a1[0]) {
 		return(a_sign(a1,a2,base,opbase));
 	}else	
 		return (addinfcalc(a1,a2,base));
