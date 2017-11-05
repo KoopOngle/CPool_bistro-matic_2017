@@ -16,13 +16,14 @@ static char *val_second_if(btree_t *self, char **bases)
 {
 	char op = self->op;
 	
-	//if (op == bases[1][5])
-		//return (inf_mod(btree_t_val(self->left, bases)
-		//			,btree_t_val(self->right, bases), bases));
-		//if (op == bases[1][6])
-		//return (inf_div(btree_t_val(self->left, bases)
-		//			,btree_t_val(self->right, bases), bases));
-	return("Error operator");
+	if (op == bases[1][5])
+		return (inf_mod(btree_t_val(self->left, bases)
+				,btree_t_val(self->right, bases), bases));
+	if (op == bases[1][6])
+		return (inf_div(btree_t_val(self->left, bases)
+				,btree_t_val(self->right, bases), bases));
+	my_putstr("Error Operators");
+	exit(84);
 }
 
 static char *val_first_if(btree_t *self, char **bases)
