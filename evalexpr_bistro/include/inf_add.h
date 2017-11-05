@@ -18,7 +18,7 @@ char *subinfcalc(char *a1, char *a2, char *base);
 void my_concat_str(char *src, char *str);
 int my_new_strcmp(char *str, char *str2, char **bases);
 char *chooseGoodOp(char sign1, char sign2, char **strs, char **bases);
-int my_comp_nbrstr(char *str, char *str2, char *base)
+//int my_comp_nbrstr(char *str, char *str2, char *base)
 char *inf_add(char *str1, char *str2, char **bases);
 char *inf_sub(char *str1, char *str2, char **bases);
 char *clear_z(char *str, char *base);
@@ -28,7 +28,6 @@ char *inf_mult(char *a1, char *a2, char *base, char *opbase);
 void k_clear_z_mult(char **str, char *base, char *opase);
 char *inf_div(char *a1, char *a2, char **base);
 char *divinf(char *a1, char *a2, char **bases);
-char *a_sign(char *a1, char *a2, char **bases);
 char *div_calc_next(char *a1, char *a2, char **bases);
 int verify(char *a1, char *a2, char **bases);
 int verify_m(char *a1, char *a2, char **bases);
