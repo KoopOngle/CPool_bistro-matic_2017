@@ -61,6 +61,8 @@ char *addinfcalc(char *a1, char *a2, char *base)
 		res[i] = '\0';
 	my_revstr(res);
 	k_clear_z(&res, base);
+	free(a1strdup);
+	free(a2strdup);
 	return (res);
 }
 
@@ -94,6 +96,8 @@ char *subinfcalc(char *a1, char *a2, char *base)
 		res[i + 1] = '\0';
 	} else
 		res[i] = '\0';
+	free(a1strdup);
+	free(a2strdup);
 	my_revstr(res);
 	k_clear_z(&res, base);
 	return (res);
