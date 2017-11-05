@@ -118,10 +118,10 @@ char *div_calc_next(char *a1, char *a2, char **bases)
 		t_number = inf_add(number, t_number, bases);
 		//printf("Bonjour apèrs inf_add\n");
 	}
-	if (stra[0] == bases[1][3])
+	if (stra[0] == bases[1][3]) {
 		//printf("Bonjour 2\n");
 		t_number = inf_sub(t_number, number, bases);
-		
+	}
 	return (t_number);
 }
 
@@ -163,7 +163,7 @@ char is_divisble(char *a1, char *a2, char **bases) {
 	char *str = inf_div(a1, a2, bases);
 	//printf("-------%s\n", str);
 	if (a1[0] == bases[0][0])
-		return ('0');
+		return (bases[0][0]);
 	else
 		return (str[0]);
 }
@@ -187,7 +187,7 @@ char *divinf(char *a1, char *a2, char **bases)
 	res[k] = 0;
 	while (stra[i] != '\0') {
 		a3[j] = stra[i];
-		if (my_strlen(a3) >= a2s && verify_m(a3,a2,bases) == 1) {
+		if (my_strlen(a3) >= a2s && my_new_strcmp(a2,a3,bases) <= 0) {
 			//printf("ABCDEF \n");
 			a4 = div_calc_next(a3,a2,bases);
 			//printf("1 = %s|%s|%s|%s|%s\n\n", a4,stra,strb,res, a3);
@@ -198,13 +198,14 @@ char *divinf(char *a1, char *a2, char **bases)
 			k++;
 			}
 			//printf("2 = %s|%s|%s|%s|%s\n\n", a3,stra,strb,res,a4);
-			a3 = modulo(a3,a2,bases);
+			if (stra[i + 1] != '\0')
+				a3 = modulo(a3,a2,bases);
 			j = my_strlen(a3) - 1;
 			//printf("6 = %s|%s|%s|%s|%s\n\n", a3,stra,strb,res,a4);
 			bool = 1;
-			//printf("A\n");
-		} else if (((stra[i] == bases[0][0] || is_in_to_base(bases[0],a3[j]) == 1) && verify_m(a3,a2,bases) != 1 && bool == 1) || stra[i + 1] == '\0') {
+		} else if ((stra[i] == bases[0][0] || is_in_to_base(bases[0],a3[j]) == 1) && my_new_strcmp(a2,a3,bases) > 0 && bool == 1) {
 			//printf("TEST = %s\n", a3);
+			//lase condition  || stra[i + 1] == '\0'
 			res[k] = is_divisble(a3,a2,bases);
 			//res[k] = a3[j];
 			k++;
@@ -222,6 +223,9 @@ char *inf_div(char *a1, char *a2, char **bases)
 {
 	char *stra = my_strdup(a1);
 	char *strb = my_strdup(a2);
+	char *strzero = malloc(sizeof(char) * 2);
+	strzero[0] = bases[0][0];
+		
 	stra = clear_za(a1, bases[0], bases[1]);
 	strb = clear_za(a2, bases[0], bases[1]);
 	
@@ -237,7 +241,7 @@ char *inf_div(char *a1, char *a2, char **bases)
 	} else if ((a1[0] != bases[1][3] && a2[0] != bases[1][3]) && verify_m(a1,a2,bases) == 1) {
 	        return(divinf(stra,strb,bases));
 	} else
-		return("0");
+		return(strzero);
 }
 
 int main(int ac, char **av)
