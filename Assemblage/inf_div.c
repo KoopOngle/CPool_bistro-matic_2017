@@ -199,26 +199,34 @@ char *divinf(char *a1, char *a2, char **bases)
 	return (res);
 }
 
+char *a_sign(char *a1, char *a2, char **bases)
+{
+	if ((a1[0] == bases[1][3] && a2[0] == bases[1][3]) && my_new_strcmp(a1, a2, bases) >= 0) {
+		return(divinf(stra, strb, bases));
+		
+	} else if (a1[0] == bases[1][3] && my_new_strcmp(a1, a2, bases) >= 0) {
+		return(add_minus_a(divinf(stra, strb, bases),bases[1]));
+		
+	} else if (a2[0] == bases[1][3] && my_new_strcmp(a1, a2, bases) >= 0) {
+	        return(add_minus_a(divinf(stra, strb, bases),bases[1]));
+
+}
+
 char *inf_div(char *a1, char *a2, char **bases)
 {
 	char *stra = my_strdup(a1);
 	char *strb = my_strdup(a2);
 	char *strzero = malloc(sizeof(char) * 2);
 	strzero[0] = bases[0][0];
-		
+
 	stra = clear_za(a1, bases[0], bases[1]);
 	strb = clear_za(a2, bases[0], bases[1]);
-	if ((a1[0] == bases[1][3] && a2[0] == bases[1][3]) && my_new_strcmp(a1,a2,bases) >= 0) {
-		return(divinf(stra,strb,bases));
-		
-	} else if (a1[0] == bases[1][3] && my_new_strcmp(a1,a2,bases) >= 0) {
-		return(add_minus_a(divinf(stra,strb,bases),bases[1]));
-		
-	} else if (a2[0] == bases[1][3] && my_new_strcmp(a1,a2,bases) >= 0) {
-	        return(add_minus_a(divinf(stra,strb,bases),bases[1]));
-		
-	} else if ((a1[0] != bases[1][3] && a2[0] != bases[1][3]) && (my_new_strcmp(a1,a2,bases) >= 0)) {
-	        return(divinf(stra,strb,bases));
+	if ((a1[0] == bases[1][3] && a2[0] == bases[1][3])
+	    && my_new_strcmp(a1, a2, bases) >= 0) {
+		return(a_sign(stra, strb, bases));
+	} else if ((a1[0] != bases[1][3] && a2[0] != bases[1][3])
+		   && (my_new_strcmp(a1, a2, bases) >= 0)) {
+	        return(divinf(stra, strb, bases));
 	} else
 		return(strzero);
 }

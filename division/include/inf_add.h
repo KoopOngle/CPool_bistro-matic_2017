@@ -21,4 +21,5 @@ char *clear_z(char *str, char *base);
 int add_zero(int j, char *res, char *base);
 char *multcalc(char *a1, char *a2, char *base);
 char *inf_mult(char *a1, char *a2, char *base, char *opbase);
+char *inf_div(char *a1, char *a2 , char **base);
 #endif

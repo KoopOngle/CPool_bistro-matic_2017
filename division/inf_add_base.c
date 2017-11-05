@@ -86,7 +86,7 @@ char *subinfcalc(char *a1, char *a2, char *base)
 	char *res = malloc(sizeof(char) * (a1s + a2s) + 1);
         char *a1strdup = my_revstr(my_strdup(a1));
 	char *a2strdup = my_revstr(my_strdup(a2));
-	
+
 	for(i = 0; i < a1s || i < a2s; i++) {
 		if (i >= a1s) {
 			res[i] += in_to_base(base, a2strdup[i]);
