@@ -24,6 +24,17 @@ char *add_minus(char *str, char *opbase)
 	return (my_revstr(res));
 }
 
+char *k_clear_zb(char *str, char *base, char *opbase)
+{
+	char *tmp = my_strdup(str);
+
+	if (tmp[0] == opbase[3])
+		tmp++;
+	while (tmp[0] == base[0] && tmp[1] != '\0')
+		tmp++;
+	return (tmp);
+}
+
 void k_clear_z(char **str, char *base)
 {
 	while (str[0][0] == base[0] && str[0][1] != '\0')
@@ -165,10 +176,12 @@ int my_comp_nbrstr(char *str, char *str2, char *base)
 int my_new_strcmp(char *str, char *str2, char **bases)
 {
         char *compstr;
-        int strlen1 = my_strlen(str);
-        int strlen2 = my_strlen(str2);
         int strlendif;
         int i = 0;
+	char *strdup = k_clear_zb(str, bases[0], bases[1]);
+	char *str2dup = k_clear_zb(str2, bases[0], bases[1]);
+        int strlen1 = my_strlen(strdup);
+        int strlen2 = my_strlen(str2dup);
 
         if (strlen1 > strlen2) {
                 strlendif = strlen1 - strlen2;
@@ -177,8 +190,8 @@ int my_new_strcmp(char *str, char *str2, char **bases)
                         compstr[i] = bases[0][0];
                 }
                 compstr[i] = '\0';
-                my_concat_str(compstr, str2);
-                return (my_comp_nbrstr(str, compstr, bases[0]));
+                my_concat_str(compstr, str2dup);
+                return (my_comp_nbrstr(strdup, compstr, bases[0]));
         } else if (strlen1 < strlen2) {
                 strlendif = strlen2 - strlen1;
                 compstr = malloc(sizeof(char) * strlen2);
@@ -186,10 +199,10 @@ int my_new_strcmp(char *str, char *str2, char **bases)
                         compstr[i] = bases[0][0];
                 }
                 compstr[i] = '\0';
-                my_concat_str(compstr, str);
-                return (my_comp_nbrstr(compstr, str2, bases[0]));
+                my_concat_str(compstr, strdup);
+                return (my_comp_nbrstr(compstr, str2dup, bases[0]));
         } else 
-                return(my_comp_nbrstr(str, str2, bases[0]));
+                return(my_comp_nbrstr(strdup, str2dup, bases[0]));
 }
 
 

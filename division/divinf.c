@@ -228,30 +228,17 @@ char *inf_div(char *a1, char *a2, char **bases)
 		
 	stra = clear_za(a1, bases[0], bases[1]);
 	strb = clear_za(a2, bases[0], bases[1]);
-	
-	if ((a1[0] == bases[1][3] && a2[0] == bases[1][3]) && verify_m(a1,a2,bases) == 1) {
+	if ((a1[0] == bases[1][3] && a2[0] == bases[1][3]) && my_new_strcmp(a1,a2,bases) >= 0) {
 		return(divinf(stra,strb,bases));
 		
-	} else if (a1[0] == bases[1][3] && verify_m(a1,a2,bases) == 1) {
+	} else if (a1[0] == bases[1][3] && my_new_strcmp(a1,a2,bases) >= 0) {
 		return(add_minus_a(divinf(stra,strb,bases),bases[1]));
 		
-	} else if (a2[0] == bases[1][3] && verify_m(a1,a2,bases) == 1) {
+	} else if (a2[0] == bases[1][3] && my_new_strcmp(a1,a2,bases) >= 0) {
 	        return(add_minus_a(divinf(stra,strb,bases),bases[1]));
 		
-	} else if ((a1[0] != bases[1][3] && a2[0] != bases[1][3]) && verify_m(a1,a2,bases) == 1) {
+	} else if ((a1[0] != bases[1][3] && a2[0] != bases[1][3]) && (my_new_strcmp(a1,a2,bases) >= 0)) {
 	        return(divinf(stra,strb,bases));
 	} else
 		return(strzero);
-}
-
-int main(int ac, char **av)
-{
-	char **bases = malloc(sizeof(char *) * 2);
-	bases[0] = my_strdup("0123456789");
-	bases[1] = my_strdup("()+-");
-
-	if (ac != 3)
-		return (0);
-	else
-		printf("%s\n",inf_div(av[1],av[2],bases));
 }
