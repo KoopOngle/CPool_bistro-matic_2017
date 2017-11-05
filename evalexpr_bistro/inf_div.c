@@ -197,10 +197,10 @@ char *a_sign(char *a1, char *a2, char **bases)
 		return(divinf(stra, strb, bases));
 		
 	} else if (a1[0] == bases[1][3] && my_new_strcmp(a1, a2, bases) >= 0) {
-		return(add_minus_a(divinf(stra, strb, bases),bases[1]));
+		return(add_minus(divinf(stra, strb, bases),bases[1]));
 		
 	} else if (a2[0] == bases[1][3] && my_new_strcmp(a1, a2, bases) >= 0) {
-	        return(add_minus_a(divinf(stra, strb, bases),bases[1]));
+	        return(add_minus(divinf(stra, strb, bases),bases[1]));
 
 }
 
