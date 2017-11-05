@@ -3,8 +3,6 @@
 #include "include/my.h"
 #include "include/inf_add.h"
 
-char *inf_div(char *a1, char *a2, char **bases);
-
 int in_to_base_a(char *base, char c)
 {
 	for(int i = 0; base[i] != '\0'; i++)
@@ -17,15 +15,6 @@ int is_in_to_base(char *base, char c)
 	for(int i = 0; base[i] != '\0'; i++)
 		if (base[i] == c)
 			return (1);
-}
-
-char *add_minus_a(char *str, char *opbase)
-{
-	char *res = malloc(sizeof(char) * (my_strlen(str)) + 2);
-	res = my_revstr(str);
-	res[my_strlen(str)] = opbase[3];
-	res[my_strlen(str) + 1] = '\0';
-	return (my_revstr(res));
 }
 
 char *k_clear_za(char *str, char *base, char *opbase)
@@ -201,6 +190,9 @@ char *divinf(char *a1, char *a2, char **bases)
 
 char *a_sign(char *a1, char *a2, char **bases)
 {
+	char *stra = my_strdup(a1);
+	char *strb = my_strdup(a2);
+
 	if ((a1[0] == bases[1][3] && a2[0] == bases[1][3]) && my_new_strcmp(a1, a2, bases) >= 0) {
 		return(divinf(stra, strb, bases));
 		
