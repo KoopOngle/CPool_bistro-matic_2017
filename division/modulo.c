@@ -16,24 +16,8 @@ char *modulo_a(char *a1, char *a2, char **bases)
 		return (a1);
 	
         tmp = inf_div(a1, a2, bases);
-	printf("%s\n",tmp);
         nb3 = inf_mult(a2, tmp, bases[0], bases[1]);
-	printf("%s\n",nb3);
         res = inf_sub(a1, nb3, bases);
-	printf("%s\n",res);
 	
         return (res);
-}
-
-int main(int ac, char **av)
-{
-	char **bases = malloc(sizeof(char *) * 2);
-        bases[0] = my_strdup("0123456789");
-        bases[1] = my_strdup("()+-");
-	
-        if (ac != 3)
-                return (0);
-        else
-                printf("%s\n",modulo_a(av[1], av[2], bases));
-	
 }
