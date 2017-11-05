@@ -16,7 +16,7 @@ SRC	=	btree_calcfunc.c \
 		main.c \
 		main_bistro.c \
 		modulo.c \
-		inf_div.c
+		divinf.c
 
 OBJ	=	$(SRC:.c=.o)
 
