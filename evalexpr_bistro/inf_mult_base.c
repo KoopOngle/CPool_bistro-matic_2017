@@ -3,27 +3,12 @@
 #include "include/my.h"
 #include "inf_add.h"
 
-char *clear_z(char *str, char *base)
+void k_clear_z_mult(char **str, char *base, char *opbase)
 {
-	char *tmp = malloc(sizeof(char) * (my_strlen(str)) + 1);
-	int k = 0;
-	int basel = my_strlen(base);
-	int bool = 0;
-	
-	for (int i = 0; str[i] != '\0'; i++) {
-		if ((in_to_base(base, str[i]) > 0 && in_to_base(base, str[i]) <= basel) && bool != 1) {
-			tmp[k] = str[i];
-			k++;
-			bool = 1;
-		}
-		else if (bool == 1) {
-			tmp[k] = str[i];
-			k++;
-		}
-	}
-	tmp[k] = '\0';
-	
-	return (tmp);
+	if (str[0][0] == opbase[3])
+		str[0]++;
+	while (str[0][0] == base[0] && str[0][1] != '\0')
+		str[0]++;
 }
 
 int add_zero(int j, char *res, char *base)
@@ -81,30 +66,33 @@ char *multcalc(char *a1, char *a2, char *base)
 }
 
 char *inf_mult(char *a1, char *a2, char *base, char *opbase)
-{
+{	
 	char *tmp = (my_strlen(a1) < my_strlen(a2)) ? a1 : a2;
-	
+	char *result;
+
 	if (my_strlen(a1) < my_strlen(a2)) {
 		a1 = (my_strlen(a1) < my_strlen(a2)) ?  a2 : tmp;
 		a2 = (my_strlen(a2) > my_strlen(tmp)) ? tmp : a2;
 	}
 	if (a1[0] == opbase[3] && a2[0] == opbase[3]) {
-		a1 = clear_z(a1,base);
-		a2 = clear_z(a2,base);
+		k_clear_z_mult(&a1, base, opbase);
+		k_clear_z_mult(&a2, base, opbase);
 		return (multcalc(a1,a2,base));
 	}
 	else if (a1[0] == opbase[3] || a2[0] == opbase[3]) {
-		a1 = clear_z(a1,base);
-		a2 = clear_z(a2,base);
-		return (add_minus(multcalc(a1,a2,base),opbase));
-	} else {		
-		a1 = clear_z(a1,base);
-		a2 = clear_z(a2,base);
+		k_clear_z_mult(&a1, base, opbase);
+		k_clear_z_mult(&a2, base, opbase);
+		result = multcalc(a1, a2, base);
+		return ((result[0] == base[0]) ? result : add_minus(result, opbase));
+	} else {
+		k_clear_z_mult(&a1, base, opbase);
+		k_clear_z_mult(&a2, base, opbase);
 		return (multcalc(a1,a2,base));
 	}
 }
 
-/*int main(int ac , char **av)
+/*
+int main(int ac , char **av)
 {
 	char *base = "0123456789";
 	char *opbase  = "012-";
@@ -114,5 +102,4 @@ char *inf_mult(char *a1, char *a2, char *base, char *opbase)
 	else
 		printf("%s\n",multinf(av[1],av[2],base,opbase));
 	return (0);
-}
-*/
+}*/
