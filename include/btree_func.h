@@ -9,7 +9,7 @@
 #define BTREE_FUNC_
 void btree_insert_data(btree_t **root, char op, char *value
 		       , int last_was_par, char *opbase);
-btree_t *btree_create_node(int value, char op);
+btree_t *btree_create_node(char *value, char op);
 void btree_concat_tree(btree_t **root, btree_t *node);
 char *btree_t_val(btree_t *self, char **bases);
 char *my_getnbrstrbase(char **str, char **bases);
