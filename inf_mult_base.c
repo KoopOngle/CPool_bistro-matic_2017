@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2017
+** Mult_inf
+** File description:
+** fonctionnel
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "include/my.h"
@@ -30,15 +37,13 @@ char *multcalc(char *a1, char *a2, char *base)
 	int zero_count = 0;
 	int k = 0;
 	int l = 0;
-	
+
 	while (j > 0) {
 		res[zero_count] = malloc(sizeof(char) * (my_strlen(a1) + my_strlen(a2) + 2));
 		l = add_zero(zero_count,res[zero_count],base);
 		while (i > 0) {
 			k += (in_to_base(base, a1[i - 1])) * (in_to_base(base, a2[j - 1]));
-			//printf("[%d]\n", k);
 			if (k >= my_strlen(base)) {
-				//printf("  '%d'  \n", k);
 				res[zero_count][l] = base[k % my_strlen(base)];
 			} else if (k <= my_strlen(base))
 				res[zero_count][l] = base[k];
@@ -49,7 +54,6 @@ char *multcalc(char *a1, char *a2, char *base)
 		if (k != 0)
 			res[zero_count][l] = base[k];
 		my_revstr(res[zero_count]);
-		//printf("  |%s|  |%d|\n", res[zero_count] , k);
 		k = 0;
 		i = my_strlen(a1);
 		zero_count += 1;
@@ -58,7 +62,6 @@ char *multcalc(char *a1, char *a2, char *base)
 	res[zero_count] = 0;
 	i = 1;
 	while (res[i] != 0) {
-		//printf("%s %d\n", res[0], i);
 		res[0] = addinfcalc(res[0],res[i],base);
 		i = i + 1;
 	}
@@ -90,16 +93,3 @@ char *inf_mult(char *a1, char *a2, char *base, char *opbase)
 		return (multcalc(a1,a2,base));
 	}
 }
-
-/*
-int main(int ac , char **av)
-{
-	char *base = "0123456789";
-	char *opbase  = "012-";
-
-	if (ac != 3)
-		return (0);
-	else
-		printf("%s\n",multinf(av[1],av[2],base,opbase));
-	return (0);
-}*/

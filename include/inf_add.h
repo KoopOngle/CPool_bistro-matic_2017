@@ -8,10 +8,14 @@
 #ifndef INF_ADD_H_
 #define INF_ADD_H_
 int in_to_base(char *base, char c);
+int in_to_base_a(char *base, char c);
 int is_to_base(char *base, char c);
+int is_in_to_base(char *base, char c);
 char *add_minus(char *str, char *opbase);
+char *add_minus_a(char *str, char *opbase);
 void k_clear_z(char **str, char *base);
 char *k_clear_za(char *str, char *base, char *opbase);
+char *k_clear_zb(char *str, char *base, char *opbase);
 char *clear_za(char *str, char *base, char *opbase);
 char *addinfcalc(char *a1, char *a2, char *base);
 char *subinfcalc(char *a1, char *a2, char *base);
