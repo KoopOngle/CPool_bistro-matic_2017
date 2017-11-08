@@ -11,10 +11,9 @@
 
 void btree_concat_tree(btree_t **root, btree_t *node)
 {
-
-        if (root != NULL && *root != NULL) {
-                btree_concat_tree(&(*root)->right, node);
-        } else if (root != NULL && *root == NULL) {
-                *root = node;
-        }
+	if (root != NULL && *root != NULL) {
+		btree_concat_tree(&(*root)->right, node);
+	} else if (root != NULL && *root == NULL) {
+		*root = node;
+	}
 }

@@ -9,25 +9,20 @@
 #include "btree.h"
 #include "stack.h"
 #include <stdlib.h>
-
-void btree_insert_data(btree_t **root, char op, char *value, int last_was_par, char *opbase);
-btree_t *btree_create_node(int value, char op);
-int btree_t_val(btree_t *self);
-void btree_concat_tree(btree_t **root, btree_t *node);
-char *my_getnbrstrbase(char **str, char **bases);
+#include "btree_func.h"
 
 int m_issign(char c)
 {
 	if (c == '\0' || c == '(')
 		return (2);
 	else if (c == '*' || c == '/' ||
-		c == '%' || c == '+' || c == '-')                                   
-		return (1);                                                    
-	else                                                                    
-		return (0);                                                     
+		 c == '%' || c == '+' || c == '-')
+		return (1);
+	else
+		return (0);
 }
 
-char *get_strparentes(char **str, char* opbase)
+static char *get_strparentes(char **str, char* opbase)
 {
 	int i = 0;
 	int par = 0;
@@ -56,7 +51,7 @@ char *get_strparentes(char **str, char* opbase)
 	return (*str);
 }
 
-btree_t *btree_sign(btree_t *node, int sign, char **bases)
+static btree_t *btree_sign(btree_t *node, int sign, char **bases)
 {
 	char *str;
 
@@ -79,9 +74,11 @@ btree_t *eval_expr(btree_t *node, char const *str, int sign, char **bases)
 	btree_t *sign_node = btree_sign(node, sign, bases);
 
 	while (strdup[0] != '\0') {;
-		if (strdup[0] == bases[1][0] || (strdup[0] == bases[1][3] && strdup[0 + 1] == bases[1][0] && nb == 0)) {
+		if (strdup[0] == bases[1][0] ||
+		    (strdup[0] == bases[1][3]
+		     && strdup[0 + 1] == bases[1][0] && nb == 0)) {
 			sign = (strdup[0] == bases[1][3]) ? 1 : 0;
-			btree_concat_tree(&node, eval_expr(NULL , get_strparentes(&strdup, bases[1]), sign, bases));
+			btree_concat_tree(&node, eval_expr(NULL, get_strparentes(&strdup, bases[1]), sign, bases));
 			last_was_par = 1;
 			nb = 1;
 		}
@@ -99,4 +96,3 @@ btree_t *eval_expr(btree_t *node, char const *str, int sign, char **bases)
 	btree_concat_tree(&sign_node, node);
 	return (sign_node);
 }
-

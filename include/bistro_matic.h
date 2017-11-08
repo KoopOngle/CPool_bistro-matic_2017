@@ -16,7 +16,7 @@ const int EXIT_READ = 84;
 const int EXIT_OPS = 84;
 const int EXIT_SYNTAX_ERROR = 84;
 
-char const *SYNTAX_ERROR_MSG = "syntaxerror";
+char const *SYNTAX_ERROR_MSG = "syntax error";
 char const *ERROR_MSG = "error";
 
 char* start_bistro(char const *base,char const *ops,

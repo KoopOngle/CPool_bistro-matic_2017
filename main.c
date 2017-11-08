@@ -8,12 +8,8 @@
 #include "my.h"
 #include "btree.h"
 #include <stdlib.h>
+#include "btree_func.h"
 
-void btree_insert_data(btree_t **root, char op, int value, int last_was_par, char **bases);
-btree_t *btree_create_node(int value, char op);
-char *btree_t_val(btree_t *self, char **bases);
-btree_t *eval_expr(btree_t *node, char *str, int sign, char **bases);
-int is_in_base(char c, char *base);
 void check_parentheses(char const *str, char *opbase)
 {
 	int openpar = 0;
@@ -36,7 +32,7 @@ void check_is_in(char const *str, char *base, char *opbase)
 {
 	int i = 0;
 	int k = 0;
-	
+
 	while (str[i] != '\0') {
 		if (is_in_base(str[i], base) != 1
 		    && is_in_base(str[i], opbase) != 1) {
