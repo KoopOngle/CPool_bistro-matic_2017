@@ -1,5 +1,12 @@
-#include "include/my.h"
-#include "include/inf_add.h"
+/*
+** EPITECH PROJECT, 2017
+** function.c
+** File description:
+** function1
+*/
+
+#include "my.h"
+#include "inf_add.h"
 #include <stdlib.h>
 
 int in_to_base(char *base, char c)

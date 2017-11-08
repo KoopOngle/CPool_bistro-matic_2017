@@ -1,26 +1,28 @@
+/*
+** EPITECH PROJECT, 2017
+** function5.c
+** File description:
+** function5
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/my.h"
-#include "include/inf_add.h"
+#include "my.h"
+#include "inf_add.h"
 
 char *modulo(char *a1, char *a2, char **bases)
 {
 	int i = 0;
 	int a1s = my_strlen(a1);
 	char *res = malloc(sizeof(char) * (a1s) + 1);
-        char *nb3 = malloc(sizeof(char) * (a1s) + 1);
+	char *nb3 = malloc(sizeof(char) * (a1s) + 1);
 	char *tmp = malloc(sizeof(char) * (a1s) + 1);
                                                                                                     
-        tmp = div_calc_next(a1, a2, bases);
-	//printf("3 = %s|%s|%s|%s|%s\n\n", res,nb3,tmp,a1,a2);
-        nb3 = inf_mult(a2, tmp, bases[0], bases[1]);
-	//printf("4 = %s|%s|%s|%s|%s\n\n", res,nb3,tmp,a1,a2);
-        res = inf_sub(a1,nb3, bases);
-	//printf("5 = %s|%s|%s|%s|%s\n\n", res,nb3,tmp,a1,a2);
-        i = my_strlen(res) + 1;                                                                     
-        res[i] = '\0';
-
-	
+	tmp = div_calc_next(a1, a2, bases);
+	nb3 = inf_mult(a2, tmp, bases[0], bases[1]);
+	res = inf_sub(a1,nb3, bases);
+	i = my_strlen(res) + 1;                                                                     
+	res[i] = '\0';
 	return (res);
 }
 

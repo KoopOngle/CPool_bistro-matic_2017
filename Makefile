@@ -5,25 +5,23 @@
 ## doop makefile
 ##
 
-SRC	=	btree_calcfunc.c \
-		btree_insert_data.c \
-		btree_concat_tree.c \
-		evalexpr.c \
-		btree_create_node.c \
-		inf_add_base.c \
-		inf_mult_base.c \
-		my_getnbrbase.c \
-		main.c \
-		main_bistro.c \
-		modulo.c \
-		function.c \
-		function_2.c \
-		function_3.c \
-		function_4.c \
-		function_5.c \
-		divinf.c
-
-OBJ	=	$(SRC:.c=.o)
+SRC	=	src/btree_calcfunc.c \
+		src/btree_insert_data.c \
+		src/btree_concat_tree.c \
+		src/evalexpr.c \
+		src/btree_create_node.c \
+		src/inf_add_base.c \
+		src/inf_mult_base.c \
+		src/my_getnbrbase.c \
+		src/main.c \
+		src/main_bistro.c \
+		src/modulo.c \
+		src/function.c \
+		src/function_2.c \
+		src/function_3.c \
+		src/function_4.c \
+		src/function_5.c \
+		src/divinf.c
 
 NAME	=	calc
 

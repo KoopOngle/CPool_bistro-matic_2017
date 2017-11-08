@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/my.h"
+#include "my.h"
 #include "inf_add.h"
 
 void k_clear_z_mult(char **str, char *base, char *opbase)
@@ -40,14 +40,14 @@ char *multcalc(char *a1, char *a2, char *base)
 
 	while (j > 0) {
 		res[zero_count] = malloc(sizeof(char) * (my_strlen(a1) + my_strlen(a2) + 2));
-		l = add_zero(zero_count,res[zero_count],base);
+		l = add_zero(zero_count,res[zero_count], base);
 		while (i > 0) {
 			k += (in_to_base(base, a1[i - 1])) * (in_to_base(base, a2[j - 1]));
 			if (k >= my_strlen(base)) {
 				res[zero_count][l] = base[k % my_strlen(base)];
 			} else if (k <= my_strlen(base))
 				res[zero_count][l] = base[k];
-			k = k/my_strlen(base);
+			k = k / my_strlen(base);
 			i = i - 1;
 			l = l + 1;
 		}
@@ -62,14 +62,14 @@ char *multcalc(char *a1, char *a2, char *base)
 	res[zero_count] = 0;
 	i = 1;
 	while (res[i] != 0) {
-		res[0] = addinfcalc(res[0],res[i],base);
+		res[0] = addinfcalc(res[0], res[i], base);
 		i = i + 1;
 	}
 	return(res[0]);
 }
 
 char *inf_mult(char *a1, char *a2, char *base, char *opbase)
-{	
+{
 	char *tmp = (my_strlen(a1) < my_strlen(a2)) ? a1 : a2;
 	char *result;
 

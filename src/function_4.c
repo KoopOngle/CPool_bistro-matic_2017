@@ -1,8 +1,14 @@
+/*
+** EPITECH PROJECT, 2017
+** function4.c
+** File description:
+** function4
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/my.h"
-#include "include/inf_add.h"
-
+#include "my.h"
+#include "inf_add.h"
 
 char *clear_za(char *str, char *base, char *opbase)
 {
@@ -19,10 +25,10 @@ char *clear_za(char *str, char *base, char *opbase)
 		else if (bool == 1) {
 			tmp[k] = str[i];
 			k++;
-                }
-        }
+		}
+	}
 	tmp[k] = '\0';
-        return (tmp);
+	return (tmp);
 }
 
 int verify(char *a1, char *a2, char **bases)
@@ -30,7 +36,7 @@ int verify(char *a1, char *a2, char **bases)
 	int i = 0;
 	char *stra = clear_za(a1,bases[0],bases[1]);
 	char *strb = clear_za(a2,bases[0],bases[1]);
-	
+
 	if (my_strlen(stra) < my_strlen(strb))
 		return (0);
 	else if (my_strlen(stra) > my_strlen(strb))
@@ -50,6 +56,7 @@ int verify_m(char *a1, char *a2, char **bases)
 	int i = 0;
 	char *stra = k_clear_za(a1,bases[0],bases[1]);
 	char *strb = k_clear_za(a2,bases[0],bases[1]);
+
 	if (my_strlen(stra) < my_strlen(strb))
 		return (0);
 	else if (my_strlen(stra) > my_strlen(strb))
@@ -73,19 +80,10 @@ char *div_calc_next(char *a1, char *a2, char **bases)
 	char *strb = my_strdup(a2);
 
 	while (stra[0] != bases[1][3]) {
-		
-		/*printf("a1 = %s\n", a1);
-		printf("a2 = %s\n", a2);
-		printf("stra = %s\n", stra);
-		printf("strb = %s\n", strb);
-		printf("bonjour 1\n");*/
 		stra = inf_sub(stra, strb, bases);
-		//printf("Bonjour après inf_sub\n");
 		t_number = inf_add(number, t_number, bases);
-		//printf("Bonjour apèrs inf_add\n");
 	}
 	if (stra[0] == bases[1][3]) {
-		//printf("Bonjour 2\n");
 		t_number = inf_sub(t_number, number, bases);
 	}
 	return (t_number);
